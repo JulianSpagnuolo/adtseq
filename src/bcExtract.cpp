@@ -79,8 +79,8 @@ int bcExtract(std::string bamIn, std::string bamOut, std::string sumoutput, std:
       buildIndex(tags);
       
       seqan::CharString readName = toCString(record.qName);
-      seqan::CharString cellbc;
-      seqan::CharString umi;
+      seqan::CharString cellbc = "NO_CBC_FOUND";
+      seqan::CharString umi = "NO_UMI_FOUND";
       
       seqan::CharString seq = record.seq;
       std::string seqStr = toCString(seq);
