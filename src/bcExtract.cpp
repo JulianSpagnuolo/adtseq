@@ -146,7 +146,7 @@ int bcExtract(std::string bamIn, std::string bamOut, std::string sumoutput, std:
       // some verbosity as sanity check
       Rcpp::Rcout << toCString(cellbc) << "\t" << toCString(umi) << std::endl;
       // write the cell_bc, umi, etc to file for analysis.
-      summary << toCString(cellbc) << "\t" << toCString(umi) << "\t" << a_cnt_rd << "\t" << t_cnt_rd << "\t" << g_cnt_rd << "\t" << c_cnt_rd << "\t" << n_cnt_rd << "\t" << rd_length << "\t" << a_cnt_bc << "\t" << t_cnt_bc << "\t" << g_cnt_bc << "\t" << c_cnt_bc << "\t" << n_cnt_bc << "\t" << a_cnt_umi << "\t" << t_cnt_umi << "\t" << g_cnt_umi << "\t" << c_cnt_umi << "\t" << n_cnt_umi << "\t" << "\n";
+      summary << toCString(cellbc) << "\t" << toCString(umi) << "\t" << a_cnt_rd << "\t" << t_cnt_rd << "\t" << g_cnt_rd << "\t" << c_cnt_rd << "\t" << n_cnt_rd << "\t" << rd_length << "\t" << a_cnt_bc << "\t" << t_cnt_bc << "\t" << g_cnt_bc << "\t" << c_cnt_bc << "\t" << n_cnt_bc << "\t" << a_cnt_umi << "\t" << t_cnt_umi << "\t" << g_cnt_umi << "\t" << c_cnt_umi << "\t" << n_cnt_umi << "\n";
       //summary << toCString(cellbc) << "\t" << toCString(umi) << "\t" << toCString(readName) << "\n";
       /// write bam out
       //writeRecord(bamFileOut, record);
