@@ -9,7 +9,3 @@ bcExtract <- function(bamIn, bamOut, sumoutput, cellBC) {
     .Call('_adtseq_bcExtract', PACKAGE = 'adtseq', bamIn, bamOut, sumoutput, cellBC)
 }
 
-hdist <- function(seqs) {
-    .Call('_adtseq_hdist', PACKAGE = 'adtseq', seqs)
-}
-

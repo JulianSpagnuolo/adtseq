@@ -9,3 +9,4 @@ Description: adtseq provides simple Rcpp methods to identify Antibody-Derived-Ta
 License: BSD_3_clause + file LICENSE
 Imports: Rcpp (>= 1.0.0), BH, RSeqAn
 LinkingTo: Rcpp, BH, RSeqAn
+RoxygenNote: 6.1.1
