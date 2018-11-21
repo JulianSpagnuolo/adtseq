@@ -34,10 +34,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// hdist
+int hdist(std::vector<std::string> seqs);
+RcppExport SEXP _adtseq_hdist(SEXP seqsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type seqs(seqsSEXP);
+    rcpp_result_gen = Rcpp::wrap(hdist(seqs));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_adtseq_adtseq", (DL_FUNC) &_adtseq_adtseq, 5},
     {"_adtseq_bcExtract", (DL_FUNC) &_adtseq_bcExtract, 4},
+    {"_adtseq_hdist", (DL_FUNC) &_adtseq_hdist, 1},
     {NULL, NULL, 0}
 };
 

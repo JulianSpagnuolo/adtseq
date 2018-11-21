@@ -2,5 +2,6 @@
 
 export(adtseq)
 export(bcExtract)
+export(hdist)
 importFrom(BiocGenerics,width)
 importFrom(Biostrings,trinucleotideFrequency)

@@ -10,7 +10,7 @@
 #' @param sumoutput Filepath for tab delimited text file output of cell-barcodes, umi, antibody, hamming distance and map score for each record in the output bam/sam
 #' @export
 adtseq <- function(bamFileName, bamOut, adtFasta, max_dist, sumoutput) {
-    .Call(`_adtseq_adtseq`, bamFileName, bamOut, adtFasta, max_dist, sumoutput)
+    .Call('_adtseq_adtseq', PACKAGE = 'adtseq', bamFileName, bamOut, adtFasta, max_dist, sumoutput)
 }
 
 #' Extraction of read names from specific cell barcodes.
@@ -21,6 +21,14 @@ adtseq <- function(bamFileName, bamOut, adtFasta, max_dist, sumoutput) {
 #' @param cellBC Character string specifying the 12 nt cell barcode for which you want to extract reads for.
 #' @export
 bcExtract <- function(bamIn, bamOut, sumoutput, cellBC) {
-    .Call(`_adtseq_bcExtract`, bamIn, bamOut, sumoutput, cellBC)
+    .Call('_adtseq_bcExtract', PACKAGE = 'adtseq', bamIn, bamOut, sumoutput, cellBC)
+}
+
+#' Pairwise Hamming Distance
+#' 
+#' @param seqs Character vector of equal length strings containing the sequences from which to calculate pairwise Hamming/String distances.
+#' @export
+hdist <- function(seqs) {
+    .Call('_adtseq_hdist', PACKAGE = 'adtseq', seqs)
 }
 
