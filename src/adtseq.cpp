@@ -142,14 +142,7 @@ public:
   }
   
 };
-//' Identify antibody-derived-tags from single cell RNAseq data
-//' 
-//' @param bamFileName The input BAM/SAM filepath, this is typically output from the dropseq-tools pipeline.
-//' @param bamOut The output BAM/SAM filepath
-//' @param adtFasta Filepath for the fasta file containing the TotalSeq antibody barcode sequences (in fasta format)
-//' @param max_dist integer. The maximum Hamming distance allowed for a barcode match to be called
-//' @param sumoutput Filepath for tab delimited text file output of cell-barcodes, umi, antibody, hamming distance and map score for each record in the output bam/sam
-//' @export
+
 // [[Rcpp::export]]
 int adtseq(std::string bamFileName, std::string bamOut, std::string adtFasta, int max_dist, std::string sumoutput) {
   

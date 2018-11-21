@@ -1,7 +1,6 @@
-complexity.entropy <- function(object) {
+complexityEntropy <- function(object) {
   
-  #' @importFrom Biostrings trinucleotideFrequency
-  #' @importFrom BiocGenerics width
+
   scores = vector(mode="numeric", length=length(object))
   tfq = trinucleotideFrequency(object) # matrix with nreads rows and 64 cols
   rls = width(object)

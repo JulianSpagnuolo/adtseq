@@ -17,13 +17,6 @@
 using namespace Rcpp;
 using namespace seqan;
 
-//' Extraction of read names from specific cell barcodes.
-//' 
-//' @param bamIn The input BAM/SAM filepath, this is typically output from the dropseq-tools pipeline (string).
-//' @param bamOut The output BAM/SAM filepath (string).
-//' @param sumoutput Filepath for tab delimited text file output of cell-barcodes, umi, fastq read name (string).
-//' @param cellBC Character string specifying the 12 nt cell barcode for which you want to extract reads for.
-//' @export
 // [[Rcpp::export]]
 int bcExtract(std::string bamIn, std::string bamOut, std::string sumoutput, std::string cellBC) {
   

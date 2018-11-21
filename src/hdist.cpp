@@ -9,10 +9,7 @@
 
 using namespace Rcpp;
 
-//' Pairwise Hamming Distance
-//' 
-//' @param seqs Character vector of equal length strings containing the sequences from which to calculate pairwise Hamming/String distances.
-//' @export
+
 // [[Rcpp::export]]
 int hdist(std::vector<std::string> seqs) {
   
