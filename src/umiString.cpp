@@ -36,8 +36,9 @@ Rcpp::IntegerMatrix hdist(std::vector<std::string> umi) {
             dist++;
           }
         }
+        distmat(i, j) = dist;
       }
-      distmat(i, j) = dist;
+      
     }
   }
   return distmat;
