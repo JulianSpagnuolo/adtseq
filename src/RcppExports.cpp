@@ -35,12 +35,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // icgrEncode
-int icgrEncode();
-RcppExport SEXP _adtseq_icgrEncode() {
+Rcpp::IntegerMatrix icgrEncode(std::string seq);
+RcppExport SEXP _adtseq_icgrEncode(SEXP seqSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(icgrEncode());
+    Rcpp::traits::input_parameter< std::string >::type seq(seqSEXP);
+    rcpp_result_gen = Rcpp::wrap(icgrEncode(seq));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -59,7 +60,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_adtseq_adtseq", (DL_FUNC) &_adtseq_adtseq, 5},
     {"_adtseq_bcExtract", (DL_FUNC) &_adtseq_bcExtract, 4},
-    {"_adtseq_icgrEncode", (DL_FUNC) &_adtseq_icgrEncode, 0},
+    {"_adtseq_icgrEncode", (DL_FUNC) &_adtseq_icgrEncode, 1},
     {"_adtseq_hdist", (DL_FUNC) &_adtseq_hdist, 1},
     {NULL, NULL, 0}
 };

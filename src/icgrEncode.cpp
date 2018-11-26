@@ -10,19 +10,31 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-int icgrEncode() {
+Rcpp::IntegerMatrix icgrEncode(std::string seq) {
   
-  std::string seq = "CGTAACTAGT"; // same example sequence from paper and in worked example in the dev notebook
+  // implement a return matrix.
+  Rcpp::IntegerMatrix results(seq.length(), 2);
+  /*
+  std::vector<char> rnames;
+  rnames.reserve(seq.length());
+  std::vector<std::string> cnames;
+  cnames.push_back("x");
+  cnames.push_back("y");
+  */
   
+  /*
   std::vector<int> pix;
   pix.reserve(seq.length());
   std::vector<int> piy;
   piy.reserve(seq.length());
+  */
   
   for(int i = 0; i < seq.length(); i++)
   {
     int aix;
     int aiy;
+    
+    //rnames[i] = seq[i]; // get rowname for pi.
     
     if(seq[i] == 'A'){
       aix = 1;
@@ -51,19 +63,16 @@ int icgrEncode() {
     }
     
     if(i == 0){
-      pix[0] = aix;
-      piy[0] = aiy;
+      results(0,0) = aix;
+      results(0,1) = aiy;
     }else
     {
-      pix[i] = (pix[i - 1]) + (std::pow(2, i)*aix); // need to change 2^i-1 to 2^i (c++ is 0 indexed, original formula is not.)
-      piy[i] = (piy[i - 1]) + (std::pow(2, i)*aiy);
+      results(i,0) = (results(i - 1, 0)) + ((2^i)*aix); // need to change 2^i-1 to 2^i (c++ is 0 indexed, original formula is not.)
+      results(i,1) = (results(i - 1, 1)) + ((2^i)*aiy);
     }
   }
   
-  for(int j = 0; j < seq.length(); j++)
-  {
-    Rcpp::Rcout << pix[j] << "\t" << piy[j] << std::endl;
-  }
+  //results.attr("dimnames") = Rcpp::List::create(rnames, cnames);
   
-  return 0;
+  return results;
 }
