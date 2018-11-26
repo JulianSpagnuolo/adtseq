@@ -34,10 +34,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// hdist
+Rcpp::IntegerMatrix hdist(std::vector<std::string> umi);
+RcppExport SEXP _adtseq_hdist(SEXP umiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type umi(umiSEXP);
+    rcpp_result_gen = Rcpp::wrap(hdist(umi));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_adtseq_adtseq", (DL_FUNC) &_adtseq_adtseq, 5},
     {"_adtseq_bcExtract", (DL_FUNC) &_adtseq_bcExtract, 4},
+    {"_adtseq_hdist", (DL_FUNC) &_adtseq_hdist, 1},
     {NULL, NULL, 0}
 };
 

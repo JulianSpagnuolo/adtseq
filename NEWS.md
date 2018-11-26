@@ -1,3 +1,8 @@
+# adtseq 0.99.1
+
+* Added Hamming Distance Function hdist.
+* Added dynamic unload utility function.
+
 # adtseq 0.99.0
 
 * Added a `NEWS.md` file to track changes to the package.
