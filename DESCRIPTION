@@ -1,7 +1,7 @@
 Package: adtseq
 Type: Package
 Title: Identification of Antibody-Derived-Tags in single cell CITE/REAP-seq data
-Version: 0.99.0
+Version: 0.99.1
 Date: 2018-11-06
 Author: Julian Spagnuolo
 Maintainer: Julian Spagnuolo <julianspagnuolo@gmail.com>

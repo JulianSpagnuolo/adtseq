@@ -9,6 +9,10 @@ bcExtract <- function(bamIn, bamOut, sumoutput, cellBC) {
     .Call('_adtseq_bcExtract', PACKAGE = 'adtseq', bamIn, bamOut, sumoutput, cellBC)
 }
 
+icgrEncode <- function() {
+    .Call('_adtseq_icgrEncode', PACKAGE = 'adtseq')
+}
+
 hdist <- function(umi) {
     .Call('_adtseq_hdist', PACKAGE = 'adtseq', umi)
 }
