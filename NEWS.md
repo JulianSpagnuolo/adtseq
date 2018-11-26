@@ -2,6 +2,7 @@
 
 * Added Hamming Distance Function hdist.
 * Added dynamic unload utility function.
+* Updated pkg Rd file.
 
 # adtseq 0.99.0
 

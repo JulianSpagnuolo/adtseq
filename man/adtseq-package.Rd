@@ -3,32 +3,31 @@
 \alias{adtseq}
 \docType{package}
 \title{
-  A short title line describing what the package does
+  Identification of Antibody-Derived-Tags in single cell CITE/REAP-seq data
 }
 \description{
-  A more detailed description of what the package does. A length
-  of about one to five lines is recommended.
+  adtseq provides simple Rcpp methods to identify Antibody-Derived-Tags in single cell CITE/REAP-seq data.
+  Currently the function is setup to accept the 15 nt Total-Seq antibody barcodes provided and distributed by BioLegend.
 }
 \details{
   This section should provide a more detailed overview of how to use the
   package, including the most important functions.
 }
 \author{
-Your Name, email optional.
+Julian Spagnuolo
 
-Maintainer: Your Name <your@email.com>
+Maintainer: Julian Spagnuolo <julian.spagnuolo@unibas.ch>
 }
 \references{
-  This optional section can contain literature or other references for
-  background information.
+  
 }
 \keyword{ package }
 \seealso{
-  Optional links to other man pages
+  
 }
 \examples{
   \dontrun{
-     ## Optional simple examples of the most important functions
-     ## These can be in \dontrun{} and \donttest{} blocks.   
+     adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam",
+     adtFasta = "total_seq_panel.fasta", max_dist = 4, sumoutput = "summary.txt")
   }
 }
