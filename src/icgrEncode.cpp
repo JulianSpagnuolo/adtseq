@@ -9,6 +9,10 @@
 // [[Rcpp::plugins(cpp14)]]
 using namespace Rcpp;
 
+// Original python implementation:
+// [Yin, C. (2018). Encoding DNA sequences by integer Chaos Game Representation, Journal of Computational Biology](https://arxiv.org/abs/1712.04546)
+// https://github.com/cyinbox/iCGR
+
 // [[Rcpp::export]]
 Rcpp::IntegerMatrix icgrEncode(std::string seq) {
   
