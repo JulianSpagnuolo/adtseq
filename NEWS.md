@@ -2,7 +2,10 @@
 
 * Altered Makevar to enable ZLIB for RSeqan
 * Added documentation for the functions.
+<<<<<<< HEAD
 * Added several functions (bcExtract, icgrEncode, complexityEntropy)
+=======
+>>>>>>> 1d09f89c710b1de6183390f80dc0f2c56829dc20
 
 # adtseq 0.99.1
 
