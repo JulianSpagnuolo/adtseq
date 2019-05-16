@@ -16,7 +16,18 @@
 // [[Rcpp::plugins(cpp14)]]
 using namespace Rcpp;
 using namespace seqan;
-
+//' @title Barcode Extractor
+//' @name bcExtract
+//' @author Julian Spagnuolo
+//' @description This function will read a processed/tagged DropSeq (not tested on 10x) BAM/SAM file, extract cell barcodes and UMIs from the BAM/SAM tags,
+//' and count the nucleotide frequency within the barcode, UMI and the read itself.
+//' It's intended function is to provide information on the diversity of the sequences within the DropSeq reads.
+//'
+//' @param bamIn, A processed BAM or SAM file that has been tagged with the cell barcode and UMI using the Dropseq-tools TagBamWithReadSequenceExtended.
+//' @param bamOut, output BAM/SAM file, will autodetect format by the suffix i.e. *.bam for BAM, *.sam for SAM
+//' @param sumout, output summary txt file
+//' @param cellBC, deprecated and unused.
+//' @export
 // [[Rcpp::export]]
 int bcExtract(std::string bamIn, std::string bamOut, std::string sumoutput, std::string cellBC) {
   
