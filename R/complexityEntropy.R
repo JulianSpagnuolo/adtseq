@@ -1,6 +1,13 @@
 complexityEntropy <- function(object) {
   
-
+  #' Entropic Complexity of Sequences
+  #'
+  #' @author Julian Spagnuolo
+  #' @description Takes a DNAStringSet and calculates the entropic complexity of each sequence within the set.
+  #' @param object A DNAStringSet
+  #' @importFrom Biostrings trinucleotideFrequency
+  #' @export
+  #' @name complexityEntropy
   scores = vector(mode="numeric", length=length(object))
   tfq = trinucleotideFrequency(object) # matrix with nreads rows and 64 cols
   rls = width(object)

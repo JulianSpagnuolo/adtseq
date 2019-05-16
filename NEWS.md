@@ -1,6 +1,7 @@
 # adtseq 0.99.2
 
 * Altered Makevar to enable ZLIB for RSeqan
+* Added documentation for the functions.
 
 # adtseq 0.99.1
 
