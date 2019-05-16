@@ -8,7 +8,13 @@
 // [[Rcpp::plugins(cpp14)]]
 using namespace Rcpp;
 
-
+//' @title Hamming Distance
+//' @name hdist
+//' @author Julian Spagnuolo
+//' @description Simple function to determine the Hamming or String distance between each pair of strings in a vector. Outputs an integer matrix.
+//'
+//' @param umi, character vector of strings.
+//' @export
 // [[Rcpp::export]]
 Rcpp::IntegerMatrix hdist(std::vector<std::string> umi) {
   

@@ -7,6 +7,6 @@ Author: Julian Spagnuolo
 Maintainer: Julian Spagnuolo <julianspagnuolo@gmail.com>
 Description: adtseq provides simple Rcpp methods to identify Antibody-Derived-Tags in single cell CITE/REAP-seq data. Currently the function is setup to accept the 15 nt Total-Seq antibody barcodes provided and distributed by BioLegend.
 License: BSD_3_clause + file LICENSE
-Imports: Rcpp (>= 1.0.0), BH, RSeqAn
+Imports: Rcpp (>= 1.0.0), BH, RSeqAn, Biostrings
 LinkingTo: Rcpp, BH, RSeqAn
 RoxygenNote: 6.1.1
