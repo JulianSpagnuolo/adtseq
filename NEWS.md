@@ -1,3 +1,7 @@
+# adtseq 0.99.2
+
+* Altered Makevar to enable ZLIB for RSeqan
+
 # adtseq 0.99.1
 
 * Added Hamming Distance Function hdist.
