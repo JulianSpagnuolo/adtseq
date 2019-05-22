@@ -76,8 +76,6 @@ bc\_length parameter must be set for custom panels.
 Default is to use the TotalSeq Panel “A” regex rules and a barcode
 length (bc\_length) of 15.
 
-\<\<\<\<\<\<\< HEAD
-
 ``` r
 # TotalSeq Panel A
 adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panel.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "A", bc_length = 15)
