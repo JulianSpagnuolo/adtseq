@@ -6,8 +6,8 @@
 using namespace Rcpp;
 
 // adtseq
-int adtseq(std::string bamFileName, std::string bamOut, std::string adtFasta, int max_dist, std::string sumoutput);
-RcppExport SEXP _adtseq_adtseq(SEXP bamFileNameSEXP, SEXP bamOutSEXP, SEXP adtFastaSEXP, SEXP max_distSEXP, SEXP sumoutputSEXP) {
+int adtseq(std::string bamFileName, std::string bamOut, std::string adtFasta, int max_dist, std::string sumoutput, std::string adt_panel, int bc_length);
+RcppExport SEXP _adtseq_adtseq(SEXP bamFileNameSEXP, SEXP bamOutSEXP, SEXP adtFastaSEXP, SEXP max_distSEXP, SEXP sumoutputSEXP, SEXP adt_panelSEXP, SEXP bc_lengthSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -16,7 +16,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type adtFasta(adtFastaSEXP);
     Rcpp::traits::input_parameter< int >::type max_dist(max_distSEXP);
     Rcpp::traits::input_parameter< std::string >::type sumoutput(sumoutputSEXP);
-    rcpp_result_gen = Rcpp::wrap(adtseq(bamFileName, bamOut, adtFasta, max_dist, sumoutput));
+    Rcpp::traits::input_parameter< std::string >::type adt_panel(adt_panelSEXP);
+    Rcpp::traits::input_parameter< int >::type bc_length(bc_lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(adtseq(bamFileName, bamOut, adtFasta, max_dist, sumoutput, adt_panel, bc_length));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -58,7 +60,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_adtseq_adtseq", (DL_FUNC) &_adtseq_adtseq, 5},
+    {"_adtseq_adtseq", (DL_FUNC) &_adtseq_adtseq, 7},
     {"_adtseq_bcExtract", (DL_FUNC) &_adtseq_bcExtract, 4},
     {"_adtseq_icgrEncode", (DL_FUNC) &_adtseq_icgrEncode, 1},
     {"_adtseq_hdist", (DL_FUNC) &_adtseq_hdist, 1},

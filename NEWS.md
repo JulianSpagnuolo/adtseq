@@ -1,7 +1,12 @@
+# adtseq 0.99.3
+
+* Added support for TotalSeq Panel B, C and custom antibody barcodes (EXPERIMENTAL)
+
 # adtseq 0.99.2
 
 * Altered Makevar to enable ZLIB for RSeqan
 * Added documentation for the functions.
+* Added several functions (bcExtract, icgrEncode, complexityEntropy)
 
 # adtseq 0.99.1
 
