@@ -18,9 +18,11 @@
 #' @param adtFasta, a fasta file containing the sequences for the antibody derived tags
 #' @param max_dist, Integer, the maximum allowed hamming distance a read can be from the expected antibody derived tag sequence in the fasta file
 #' @param sumoutput, output summary txt file
+#' @param adt_panel, character indicating which TotalSeq panel (i.e. one of "A","B" or "C") is being used or "custom" if custom home-made barcodes are used
+#' @param bc_length, character indicating how long the antibody barcodes are (only required if adt_panel == "custom").
 #' @export
-adtseq <- function(bamFileName, bamOut, adtFasta, max_dist, sumoutput) {
-    .Call('_adtseq_adtseq', PACKAGE = 'adtseq', bamFileName, bamOut, adtFasta, max_dist, sumoutput)
+adtseq <- function(bamFileName, bamOut, adtFasta, max_dist, sumoutput, adt_panel, bc_length) {
+    .Call('_adtseq_adtseq', PACKAGE = 'adtseq', bamFileName, bamOut, adtFasta, max_dist, sumoutput, adt_panel, bc_length)
 }
 
 #' @title Barcode Extractor

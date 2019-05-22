@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 #include <vector>
 #include <regex>
 #include <seqan/basic.h>
@@ -18,30 +19,79 @@ using namespace Rcpp;
 using namespace seqan;
 
 
-std::vector<std::string> adtbc(std::string sequence, std::string phredq){
+std::vector<std::string> adtbc(std::string sequence, std::string phredq, std::string adt_panel, int bc_length){
   
   // init container for results
   std::vector<std::string> res;
   res.reserve(2);
   
   // set the regex patterns for finding the ADT barcode and trim off the excess polyA
-  std::regex adt_bc ("(^[ATGCN]{15}[TGCN]{1}[AN]{6,}).*");
-  std::regex polyA ("([TGCN]{1}[AN]{6,})(.*)");
+  // TODO: Add new regex rules for TotalSeq A and B panels.
+  // TODO: Add regex rules for custom panels.
+  std::regex adt_bc;
+  std::regex polyA;
+  std::stringstream custom_rule;
+  std::string rule_str;
+  if(adt_panel == "A")
+  {
+    adt_bc = ("(^[ATGCN]{15}[TGCN]{1}[AN]{6,}).*");
+    polyA = ("([TGCN]{1}[AN]{6,})(.*)");
+  }
+  else if(adt_panel == "B")
+  {
+    adt_bc = ("(^[ATGCN]{15}[ATGCN]{9}(GCTTTAAGGCCGGTCCTAGCAA){1}[AN]{6,}).*");
+    polyA = ("([ATGCN]{9}(GCTTTAAGGCCGGTCCTAGCAA){1}[AN]{6,})(.*)");
+  }
+  else if(adt_panel == "C")
+  {
+    adt_bc = ("(^[ATGCN]{15}[ATGCN]{9}(CCCATATAAGAAA){1}[AN]{6,}).*");
+    polyA = ("([ATGCN]{9}(CCCATATAAGAAA){1}[AN]{6,})(.*)");
+  }
+  else if(adt_panel == "custom")
+  {
+    custom_rule << "(^[ATGCN]{" << bc_length << "}).";
+    rule_str = custom_rule.str();
+    adt_bc = (rule_str);
+    polyA = ("([TGCN]{1}[AN]{6,})(.*)");
+  }
+  else{
+    Rcpp::Rcout << "Please Define adt_panel correctly, ie A, B, C or custom" << std::endl;
+  }
+
+  
   
   // find the barcode
-  std::smatch bc_polyA;
-  std::regex_match(sequence, bc_polyA, adt_bc, std::regex_constants::match_default);
+  if(adt_panel == "custom")
+  {
+    std::smatch bc_polyA;
+    std::regex_match(sequence, bc_polyA, adt_bc, std::regex_constants::match_default);
+    
+    // trim the end off phredq to match the barcode read.
+    sequence = bc_polyA[1];
+    phredq = phredq.substr(0, bc_polyA.length(1));
+    
+    // find and remove the polyA.
+    //std::smatch bc_seq;
+    //std::regex_search(sequence, bc_seq, polyA);
+    res.push_back(bc_polyA[1]);
+    res.push_back(phredq);
+  }
+  else{
+    std::smatch bc_polyA;
+    std::regex_match(sequence, bc_polyA, adt_bc, std::regex_constants::match_default);
+    
+    // trim the end off phredq to match the barcode read.
+    sequence = bc_polyA[1];
+    phredq = phredq.substr(0, bc_polyA.length(1));
+    
+    // find and remove the polyA.
+    std::smatch bc_seq;
+    std::regex_search(sequence, bc_seq, polyA);
+    
+    res.push_back(sequence.substr(0, bc_seq.position(1)));
+    res.push_back(phredq.substr(0, bc_seq.position(1)));
+  }
   
-  // trim the end off phredq to match the barcode read.
-  sequence = bc_polyA[1];
-  phredq = phredq.substr(0, bc_polyA.length(1));
-  
-  // find and remove the polyA.
-  std::smatch bc_seq;
-  std::regex_search(sequence, bc_seq, polyA);
-  
-  res.push_back(sequence.substr(0, bc_seq.position(1)));
-  res.push_back(phredq.substr(0, bc_seq.position(1)));
   
   return res;
 }
@@ -90,11 +140,11 @@ public:
   };
   
   // hamming dist function for finding matches
-  void match(std::string read, std::string phredq_str, int max_dist)
+  void match(std::string read, std::string phredq_str, int max_dist, int bc_length)
   {
     // reset the result holders in the adtDictionary
     match_id = "NO_MATCH"; // no match yet.
-    hdist = 15; // highest hamming distance possible
+    hdist = bc_length; // highest hamming distance possible
     mapq = -255; // worst possible score
     
     char read_char[read.length()];
@@ -159,9 +209,11 @@ public:
 //' @param adtFasta, a fasta file containing the sequences for the antibody derived tags
 //' @param max_dist, Integer, the maximum allowed hamming distance a read can be from the expected antibody derived tag sequence in the fasta file
 //' @param sumoutput, output summary txt file
+//' @param adt_panel, character indicating which TotalSeq panel (i.e. one of "A","B" or "C") is being used or "custom" if custom home-made barcodes are used
+//' @param bc_length, character indicating how long the antibody barcodes are (only required if adt_panel == "custom").
 //' @export
 // [[Rcpp::export]]
-int adtseq(std::string bamFileName, std::string bamOut, std::string adtFasta, int max_dist, std::string sumoutput) {
+int adtseq(std::string bamFileName, std::string bamOut, std::string adtFasta, int max_dist, std::string sumoutput, std::string adt_panel, int bc_length) {
   
   
   Rcpp::Rcout << "Opening summary file stream" << std::endl;
@@ -225,7 +277,14 @@ int adtseq(std::string bamFileName, std::string bamOut, std::string adtFasta, in
       
       /// regex matching
       std::vector<std::string> barcodes;
-      barcodes = adtbc(pre_seq, pre_q);
+      if(adt_panel != "custom")
+      {
+        barcodes = adtbc(pre_seq, pre_q, adt_panel, 15);
+      }else{
+        barcodes = adtbc(pre_seq, pre_q, adt_panel, bc_length);
+      }
+      Rcpp::Rcout << barcodes[0] << "\t" << barcodes[1] << std::endl;
+      Rcpp::Rcout << adtDict.seq[1] << "\t" << " " << std::endl;
       
       /// replace old seq with regexed and trimmed seq, trim the qual line
       record.seq = barcodes[0];
@@ -251,7 +310,7 @@ int adtseq(std::string bamFileName, std::string bamOut, std::string adtFasta, in
       }else { umi = "NO_UMI_FOUND"; }
       
       // find the matching ADT barcode and write the id to a new tag "XA".
-      adtDict.match(toCString(barcodes[0]), toCString(barcodes[1]), max_dist);
+      adtDict.match(toCString(barcodes[0]), toCString(barcodes[1]), max_dist, bc_length);
       appendTagValue(tags, "XA", toCString(adtDict.match_id));
       appendTagValue(tags, "XN", adtDict.hdist);
       appendTagValue(tags, "AS", adtDict.mapq);
