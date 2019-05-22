@@ -21,7 +21,7 @@
 #' @param adt_panel, character indicating which TotalSeq panel (i.e. one of "A","B" or "C") is being used or "custom" if custom home-made barcodes are used
 #' @param bc_length, character indicating how long the antibody barcodes are (only required if adt_panel == "custom").
 #' @export
-adtseq <- function(bamFileName, bamOut, adtFasta, max_dist, sumoutput, adt_panel, bc_length) {
+adtseq <- function(bamFileName, bamOut, adtFasta, max_dist, sumoutput, adt_panel = "A", bc_length = 15L) {
     .Call('_adtseq_adtseq', PACKAGE = 'adtseq', bamFileName, bamOut, adtFasta, max_dist, sumoutput, adt_panel, bc_length)
 }
 

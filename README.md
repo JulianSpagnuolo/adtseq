@@ -63,5 +63,26 @@ steps (not
 recommended).
 
 ``` r
-adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panel.fasta", max_dist = 4, sumoutput = "summary.txt")
+adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panel.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "A", bc_length = 15)
+```
+
+## NOTE:
+
+*Experimental* support for TotalSeq panels B and C has been implemented
+but not tested. In addition, support for custom barcodes has also been
+implemented, this is controlled via the “adt\_panel” parameter. The
+bc\_length parameter must be set for custom panels.
+
+Default is to use the TotalSeq Panel “A” regex rules and a barcode
+length (bc\_length) of 15.
+
+``` r
+# TotalSeq Panel A
+adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panel.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "A", bc_length = 15)
+# TotalSeq Panel B
+adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panelB.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "B", bc_length = 15)
+# TotalSeq Panel C
+adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panelC.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "C", bc_length = 15)
+# Custom panel
+adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "custom_panel.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "custom", bc_length = 8)
 ```

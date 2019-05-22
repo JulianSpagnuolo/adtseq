@@ -213,7 +213,7 @@ public:
 //' @param bc_length, character indicating how long the antibody barcodes are (only required if adt_panel == "custom").
 //' @export
 // [[Rcpp::export]]
-int adtseq(std::string bamFileName, std::string bamOut, std::string adtFasta, int max_dist, std::string sumoutput, std::string adt_panel, int bc_length) {
+int adtseq(std::string bamFileName, std::string bamOut, std::string adtFasta, int max_dist, std::string sumoutput, std::string adt_panel = "A", int bc_length = 15) {
   
   
   Rcpp::Rcout << "Opening summary file stream" << std::endl;

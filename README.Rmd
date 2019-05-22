@@ -44,7 +44,22 @@ Additionally, the function will output a second tab-delimited text file containi
 The resulting BAM/SAM file can be directly used in latter stages of the dropseq-tools pipeline which attempt to correct for synthesis errors in the cell barcodes and UMIs. However, should users wish, they may retrieve count data directly from the text file and omit the latter steps (not recommended).
 
 ```{r example, eval=FALSE}
-adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panel.fasta", max_dist = 4, sumoutput = "summary.txt")
+adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panel.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "A", bc_length = 15)
 ```
 
+## NOTE:
 
+*Experimental* support for TotalSeq panels B and C has been implemented but not tested. In addition, support for custom barcodes has also been implemented, this is controlled via the "adt_panel" parameter. The bc_length parameter must be set for custom panels.
+
+Default is to use the TotalSeq Panel "A" regex rules and a barcode length (bc_length) of 15.
+
+```{r example2, eval=FALSE}
+# TotalSeq Panel A
+adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panel.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "A", bc_length = 15)
+# TotalSeq Panel B
+adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panelB.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "B", bc_length = 15)
+# TotalSeq Panel C
+adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "total_seq_panelC.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "C", bc_length = 15)
+# Custom panel
+adtseq(bamFileName = "ADT_processed_u.sam", bamOut = "out.sam", adtFasta = "custom_panel.fasta", max_dist = 4, sumoutput = "summary.txt", adt_panel = "custom", bc_length = 8)
+```
