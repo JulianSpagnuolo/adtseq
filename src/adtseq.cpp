@@ -283,8 +283,6 @@ int adtseq(std::string bamFileName, std::string bamOut, std::string adtFasta, in
       }else{
         barcodes = adtbc(pre_seq, pre_q, adt_panel, bc_length);
       }
-      Rcpp::Rcout << barcodes[0] << "\t" << barcodes[1] << std::endl;
-      Rcpp::Rcout << adtDict.seq[1] << "\t" << " " << std::endl;
       
       /// replace old seq with regexed and trimmed seq, trim the qual line
       record.seq = barcodes[0];
