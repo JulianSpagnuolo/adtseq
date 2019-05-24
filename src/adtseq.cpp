@@ -1,10 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <sstream>
 #include <vector>
 #include <regex>
 #include <seqan/basic.h>
+#include <seqan/seq_io.h>
 #include <seqan/bam_io.h>
 #include <seqan/stream.h>
 #include <seqan/sequence.h>
@@ -109,7 +109,33 @@ public:
   // dictionary constructor using fasta file of ADT barcodes
   void createDictionary(std::string fastaFile)
   {
+    seqan::String<char> seqFileName = fastaFile;
     
+    seqan::CharString fid;
+    seqan::CharString dnaseq;
+    
+    seqan::SeqFileIn FaFileIn(toCString(seqFileName));
+    if (!open(FaFileIn, toCString(seqFileName)))
+    {
+      Rcpp::Rcerr << "ERROR: Could not open " << fastaFile << std::endl;
+    }
+    
+    try
+    {
+      
+      while(!atEnd(FaFileIn))
+      {
+        readRecord(fid, dnaseq, FaFileIn);
+        
+        adtDictionary::id.push_back(toCString(fid));
+        adtDictionary::seq.push_back(toCString(dnaseq));
+      }
+    }
+    catch (Exception const & e)
+    {
+      Rcpp::Rcerr << "ERROR: " << e.what() << std::endl;
+    }
+     /*
     std::string line;
     std::ifstream fastaIn (fastaFile.c_str());
     
@@ -137,6 +163,7 @@ public:
       }
       fastaIn.close();
     }
+    */
   };
   
   // hamming dist function for finding matches
