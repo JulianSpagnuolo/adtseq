@@ -4,22 +4,22 @@
 #' @title Antibody Derived Tag Extraction
 #' @name adtseq
 #' @author Julian Spagnuolo
-#' @description This function will read a processed/tagged DropSeq (not tested on 10x) BAM/SAM file, tagging each record with antibody barcode name (from the provided ADT-tag fasta file)
-#' using a combination of hamming distance (less than max_dist) and best Phred quality weighted mapping score calculated as the sum of scores for each base, 
+#' @description This function will read a processed/tagged DropSeq BAM/SAM file, tagging each record with antibody barcode name, from the provided ADT-tag fasta file. NOTE: not tested on 10x.
+#' It uses a combination of hamming distance, less than max_dist, and best Phred quality weighted mapping score calculated as the sum of scores for each base, 
 #' subtracting the score at mismatches or adding at matches. This is performed similarly to the method used by Bowtie2 to determine alignment scores.
-#' At present Bowtie2’s defaults for MN (minimum score) and MX (maximum score), 2 and 6, respectively, are used.
+#' At present Bowtie2’s defaults for MN, and MX, minimum and maximum score of 2 and 6, respectively, are used.
 #' The function will place the name of the identified antibody in a new tag “XA”, the mapping score under “AS”, and the hamming distance under “XN”.
 #' Additionally, the function will output a second tab-delimited text file containing the Cell Barcodes, UMI and identified antibody along with the hamming distance and mapping scores for each bam/sam record.
 #' The resulting BAM/SAM file can be directly used in latter stages of the dropseq-tools pipeline which attempt to correct for synthesis errors in the cell barcodes and UMIs.
-#' However, should users wish, they may retrieve count data directly from the text file and omit the latter steps (not recommended).
+#' However, should users wish, they may retrieve count data directly from the text file and omit the latter steps - not recommended.
 #'
 #' @param bamFileName, An processed BAM or SAM file that has been tagged with the cell barcode and UMI using the Dropseq-tools TagBamWithReadSequenceExtended.
-#' @param bamOut, output BAM/SAM file, will autodetect format by the suffix i.e. *.bam for BAM, *.sam for SAM
+#' @param bamOut, output BAM/SAM file, will autodetect format by the file suffix
 #' @param adtFasta, a fasta file containing the sequences for the antibody derived tags
 #' @param max_dist, Integer, the maximum allowed hamming distance a read can be from the expected antibody derived tag sequence in the fasta file
 #' @param sumoutput, output summary txt file
-#' @param adt_panel, character indicating which TotalSeq panel (i.e. one of "A","B" or "C") is being used or "custom" if custom home-made barcodes are used
-#' @param bc_length, character indicating how long the antibody barcodes are (only required if adt_panel == "custom").
+#' @param adt_panel, character indicating which TotalSeq panel, i.e. one of "A","B" or "C", is being used or "custom" if custom home-made barcodes are used
+#' @param bc_length, character indicating how long the antibody barcodes are - only required if adt_panel == "custom".
 #' @export
 adtseq <- function(bamFileName, bamOut, adtFasta, max_dist, sumoutput, adt_panel = "A", bc_length = 15L) {
     .Call('_adtseq_adtseq', PACKAGE = 'adtseq', bamFileName, bamOut, adtFasta, max_dist, sumoutput, adt_panel, bc_length)
@@ -28,13 +28,13 @@ adtseq <- function(bamFileName, bamOut, adtFasta, max_dist, sumoutput, adt_panel
 #' @title Barcode Extractor
 #' @name bcExtract
 #' @author Julian Spagnuolo
-#' @description This function will read a processed/tagged DropSeq (not tested on 10x) BAM/SAM file, extract cell barcodes and UMIs from the BAM/SAM tags,
-#' and count the nucleotide frequency within the barcode, UMI and the read itself.
+#' @description This function will read a processed/tagged DropSeq BAM/SAM file, extract cell barcodes and UMIs from the BAM/SAM tags,
+#' and count the nucleotide frequency within the barcode, UMI and the read itself. NOTE: not tested on 10x
 #' It's intended function is to provide information on the diversity of the sequences within the DropSeq reads.
 #'
 #' @param bamIn, A processed BAM or SAM file that has been tagged with the cell barcode and UMI using the Dropseq-tools TagBamWithReadSequenceExtended.
-#' @param bamOut, output BAM/SAM file, will autodetect format by the suffix i.e. *.bam for BAM, *.sam for SAM
-#' @param sumout, output summary txt file
+#' @param bamOut, output BAM/SAM file, will autodetect format by the suffix.
+#' @param sumoutput, output summary txt file
 #' @param cellBC, deprecated and unused.
 #' @export
 bcExtract <- function(bamIn, bamOut, sumoutput, cellBC) {
@@ -45,17 +45,13 @@ bcExtract <- function(bamIn, bamOut, sumoutput, cellBC) {
 #' @name icgrEncode
 #' @author Julian Spagnuolo
 #' @description This function will encode a DNA sequence as an integer chaos game representation see: 
-#' [Yin, C. (2018). Encoding DNA sequences by integer Chaos Game Representation, Journal of Computational Biology](https://arxiv.org/abs/1712.04546)
+#' Yin, C., 2018. Encoding DNA sequences by integer Chaos Game Representation, Journal of Computational Biology; https://arxiv.org/abs/1712.04546; https://github.com/cyinbox/iCGR
 #' for more detail.
 #'
 #' @param seq, a character vector of length = 1
 #' @export
 icgrEncode <- function(seq) {
     .Call('_adtseq_icgrEncode', PACKAGE = 'adtseq', seq)
-}
-
-fain <- function(Fin) {
-    .Call('_adtseq_fain', PACKAGE = 'adtseq', Fin)
 }
 
 #' @title Hamming Distance

@@ -7,5 +7,5 @@
 #' @import Rcpp BH RSeqAn Biostrings
 #' @importFrom Rcpp evalCpp
 #' @useDynLib adtseq
-#' @name adtseq
+#' @name adtseq-package
 NULL 
