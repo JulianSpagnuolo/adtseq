@@ -19,13 +19,13 @@ using namespace seqan;
 //' @title Barcode Extractor
 //' @name bcExtract
 //' @author Julian Spagnuolo
-//' @description This function will read a processed/tagged DropSeq (not tested on 10x) BAM/SAM file, extract cell barcodes and UMIs from the BAM/SAM tags,
-//' and count the nucleotide frequency within the barcode, UMI and the read itself.
+//' @description This function will read a processed/tagged DropSeq BAM/SAM file, extract cell barcodes and UMIs from the BAM/SAM tags,
+//' and count the nucleotide frequency within the barcode, UMI and the read itself. NOTE: not tested on 10x
 //' It's intended function is to provide information on the diversity of the sequences within the DropSeq reads.
 //'
 //' @param bamIn, A processed BAM or SAM file that has been tagged with the cell barcode and UMI using the Dropseq-tools TagBamWithReadSequenceExtended.
-//' @param bamOut, output BAM/SAM file, will autodetect format by the suffix i.e. *.bam for BAM, *.sam for SAM
-//' @param sumout, output summary txt file
+//' @param bamOut, output BAM/SAM file, will autodetect format by the suffix.
+//' @param sumoutput, output summary txt file
 //' @param cellBC, deprecated and unused.
 //' @export
 // [[Rcpp::export]]

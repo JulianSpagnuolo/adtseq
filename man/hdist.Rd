@@ -3,6 +3,9 @@
 \name{hdist}
 \alias{hdist}
 \title{Hamming Distance}
+\usage{
+hdist(umi)
+}
 \arguments{
 \item{umi, }{character vector of strings.}
 }

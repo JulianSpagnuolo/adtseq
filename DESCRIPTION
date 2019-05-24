@@ -10,3 +10,4 @@ License: BSD_3_clause + file LICENSE
 Imports: Rcpp (>= 1.0.0), BH, RSeqAn, Biostrings
 LinkingTo: Rcpp, BH, RSeqAn
 RoxygenNote: 6.1.1
+Encoding: UTF-8

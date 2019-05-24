@@ -16,7 +16,7 @@ using namespace Rcpp;
 //' @name icgrEncode
 //' @author Julian Spagnuolo
 //' @description This function will encode a DNA sequence as an integer chaos game representation see: 
-//' [Yin, C. (2018). Encoding DNA sequences by integer Chaos Game Representation, Journal of Computational Biology](https://arxiv.org/abs/1712.04546)
+//' Yin, C., 2018. Encoding DNA sequences by integer Chaos Game Representation, Journal of Computational Biology; https://arxiv.org/abs/1712.04546; https://github.com/cyinbox/iCGR
 //' for more detail.
 //'
 //' @param seq, a character vector of length = 1
