@@ -54,6 +54,10 @@ icgrEncode <- function(seq) {
     .Call('_adtseq_icgrEncode', PACKAGE = 'adtseq', seq)
 }
 
+fain <- function(Fin) {
+    .Call('_adtseq_fain', PACKAGE = 'adtseq', Fin)
+}
+
 #' @title Hamming Distance
 #' @name hdist
 #' @author Julian Spagnuolo

@@ -1,6 +1,7 @@
 # adtseq 0.99.3
 
 * Added support for TotalSeq Panel B, C and custom antibody barcodes (EXPERIMENTAL)
+* Modified Fasta read in method, now uses Seqan methods instead of c++ ifstream.
 
 # adtseq 0.99.2
 
