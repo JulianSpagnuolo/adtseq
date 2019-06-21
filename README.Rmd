@@ -28,6 +28,15 @@ BiocManager::install("RSeqan")
 install_github("JulianSpagnuolo/adtseq")
 ```
 
+### Citation
+
+It is requested that any published or presented work that utlised this package and scripts contained within cite adtseq.
+
+```{r, echo=FALSE}
+citation("adtseq")
+```
+
+
 ## Example
 
 The primary function `adtseq` will take two files as input; A) a fasta file containing the antibody derived barcodes to identify in the sequencing data, B) a bam or sam file that has been processed through the dropseq-tools pipeline to tag read 2 reads with the cell barcodes and UMIs, remove the SMART-PCR adapter sequences and (optionally) 3' polyA stretches. It is intended that this function be used at command line as it is currently extremely verbose and will output cell barcodes, UMI, antibody-ID, hamming distance and map score directly to std output.

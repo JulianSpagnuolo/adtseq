@@ -26,6 +26,32 @@ BiocManager::install("RSeqan")
 install_github("JulianSpagnuolo/adtseq")
 ```
 
+### Citation
+
+It is requested that any published or presented work that utlised this
+package and scripts contained within cite adtseq.
+
+    #> 
+    #> To cite package 'adtseq' in publications use:
+    #> 
+    #>   Julian Spagnuolo (2018). adtseq: Identification of
+    #>   Antibody-Derived-Tags in single cell CITE/REAP-seq data. R
+    #>   package version 0.99.3.
+    #> 
+    #> A BibTeX entry for LaTeX users is
+    #> 
+    #>   @Manual{,
+    #>     title = {adtseq: Identification of Antibody-Derived-Tags in single cell
+    #> CITE/REAP-seq data},
+    #>     author = {Julian Spagnuolo},
+    #>     year = {2018},
+    #>     note = {R package version 0.99.3},
+    #>   }
+    #> 
+    #> ATTENTION: This citation information has been auto-generated from
+    #> the package DESCRIPTION file and may need manual editing, see
+    #> 'help("citation")'.
+
 ## Example
 
 The primary function `adtseq` will take two files as input; A) a fasta
